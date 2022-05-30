@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simple Complaint Form</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static',filename='style/style.css') }}">
+  </head>
+  <body>
+    <!-- By Dominik Biedebach @domobch -->
+    <section>
+      <nav class="stroke">
+        {% if user == "" %}
+        <p>Select a user type</p>
+        {% else %}
+        <p>Logged in as {{ user }} </p>
+        {% endif %}
+
+        <ul>
+          <li><a href="/switchuser">Switch User</a></li>
+
+          {% if user == "Patient" %}
+          <li><a href="/prescriptions">Request Prescription</a></li>
+          <li><a href="/appointments">Request Appointment</a></li>
+          {% endif %}
+
+          {% if user == "Doctor" %}
+          <li><a href="/prescriptions">Issue Prescription</a></li>
+          {% endif %}
+
+          {% if user == "Receptionist" %}
+          <li><a href="/appointments">Appointments</a></li>
+          {% endif %}
+        </ul>
+      </nav>
+    </section>
+
+    <div class="testbox">
+      {% block form %}{% endblock %}
+      {% block result %}{% endblock %}
+      
+    </div>
+    <div class="testbox">
+      {% block tableView %}{% endblock %}
+      
+    </div>
+  </body>
+</html>

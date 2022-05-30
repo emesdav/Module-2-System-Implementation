@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block form %}
+<form action="/switchuser" method="POST">
+  <h1>Login</h1>
+  <hr/>
+    <div class="btn-block">
+      <p>Please select a user access level</p>
+      <select name="usertype">
+        <option value="Doctor">Doctor</option>
+        <option value="Nurse">Nurse</option>
+        <option value="Receptionist">Receptionist</option>
+        <option value="Patient">Patient</option>
+      </select>
+    <button type="submit" href="/">Get Me In</button>
+    </div>
+</form>
+{% endblock %}

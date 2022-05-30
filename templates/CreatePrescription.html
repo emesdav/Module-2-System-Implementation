@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block form %}
+  {% if state == "get" %}
+  <form action="/prescriptions" method="POST">
+    <h1>New Prescription</h1>
+    <hr/>
+    <div class="item">
+          <p>Type</p>
+          <input type="text" name="type"/>
+        </div>
+    <div class="item">
+      <p>Doctor</p>
+      <select name="doctorid">
+        <option value="11">Dr. Doc Doctor</option>
+      </select>
+    </div>
+    <div class="item">
+      <p>Patient</p>
+      <select name = "patientid">
+        <option value="12">John Doe</option>
+      </select>
+    </div>
+    <div class="item">
+          <p>Quantity</p>
+          <input type="number" name="quantity"/>
+        </div>
+        <div class="item">
+          <p>Dosage</p>
+          <input type="number" name="dosage"/>
+        </div>
+    <div class="btn-block">
+      <button type="submit" href="/">Create Prescription</button>
+    </div>
+  </form>
+  {% endif %}
+
+{% endblock %}
+
+{% block result %}
+  {% if state == "set" %}
+<div class="Result">
+<h1>Prescription Confirmation</h1>
+    <hr/>
+  Prescription has been successfully added.
+</div>
+  {% endif %}
+{% endblock %}
+
+{% block tableView %}
+  {% if user == "Doctor" %}
+  <table>
+    <tr>
+      <th>Type</th>
+      <th>Patient</th>
+      <th>Quantity</th>
+      <th>Dosage</th>
+      <th>Doctor</th>
+    </tr>
+    {% for record in PrescriptionData %}
+      <tr>
+      <td>{{record[1]}}</td>
+      <td>{{record[2]}}</td>
+      <td>{{record[4]}}</td>
+      <td>{{record[5]}}</td>
+      <td>{{record[3]}}</td>
+    </tr>
+    {% endfor %}
+  </table>
+  {% endif %}
+{% endblock %}

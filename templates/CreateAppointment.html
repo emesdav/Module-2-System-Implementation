@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block form %}
+  {% if state == "get" %}
+  <form action="/appointments" method="POST">
+    <h1>New Appointment</h1>
+    <hr/>
+    <div class="item">
+      <p>Type</p>
+      <input type="text" name="type"/>
+    </div>
+    <div class="item">
+      <p>Personnel</p>
+      <select name="personnelid">
+        <option value="1">Doctor</option>
+        <option value="2">Nurse</option>
+        <option value="3">Receptionist</option>
+        <option value="4">Patient</option>
+      </select>
+    </div>
+    <div class="item">
+      <p>Patient</p>
+      <select name="patientid">
+        <option value="1">John Doe</option>
+      </select>
+    </div>
+    <div class="btn-block">
+      <button type="submit" href="/">Confirm Appointment</button>
+    </div>
+  </form>
+  {% endif %}
+{% endblock %}
+
+{% block result %}
+  {% if state == "set" %}
+<div class="Result">
+<h1>Appointment Confirmation</h1>
+    <hr/>
+  Appointment has been successfully added.
+</div>
+  {% endif %}
+{% endblock %}
+
+{% block tableView %}
+  {% if user == "Receptionist" %}
+    <table class="hv">
+      <tr>
+        <th>Type</th>
+        <th>Personnel</th>
+        <th>Patient</th>
+        <th>Action</th>
+      </tr>
+      {% for record in AppointmentData %}
+        <tr>
+        <td>{{record[1]}}</td>
+        <td>{{record[2]}}</td>
+        <td>{{record[3]}}</td>
+          <td><a class="button" href="?action=cancel&appointmentid={{ record[0] }}">Cancel</a></td>
+      </tr>
+      {% endfor %}
+
+
+    </table>
+  {% endif %}
+{% endblock %}
